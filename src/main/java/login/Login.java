@@ -1,5 +1,11 @@
 package login;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 import javafx.application.Application;
 //import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -22,6 +28,7 @@ import main.body.MainBodyStart;
 
 public class Login extends Application {
 	private int i = 0;
+	static Logger log = Logger.getLogger(Login.class.getName());
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -67,14 +74,17 @@ public class Login extends Application {
 			try {
 
 				if (userTField.getText().contentEquals(strings.getuName()) && pwBox.getText().contentEquals(strings.getpWord())) {
+					log.info("User "+userTField.getText()+" logged in succesfully at "+ ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS));
 					primaryStage.close();
 					new MainBodyStart();
 
 				} else {
 					if (i <= 2) {
+						log.info("User "+userTField.getText()+" Failed to login at "+ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS));
 						i++;
 						throw new loginException();
 					} else {
+						log.info("Maximum number of login attempts were made at "+ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS));
 						throw new maxLoginException();
 					}
 
@@ -90,6 +100,7 @@ public class Login extends Application {
 	}
 
 	public static void main(String[] args) {
+		BasicConfigurator.configure();
 		launch(args);
 	}
 
