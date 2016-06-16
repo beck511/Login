@@ -7,7 +7,6 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import javafx.application.Application;
-//import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -80,11 +79,11 @@ public class Login extends Application {
 
 				} else {
 					if (i <= 2) {
-						log.info("User "+userTField.getText()+" Failed to login at "+ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS));
+						log.warn("User "+userTField.getText()+" Failed to login at "+ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS));
 						i++;
 						throw new loginException();
 					} else {
-						log.info("Maximum number of login attempts were made at "+ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS));
+						log.warn("Maximum number of login attempts were made at "+ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS));
 						throw new maxLoginException();
 					}
 
