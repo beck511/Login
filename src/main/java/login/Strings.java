@@ -16,7 +16,8 @@ public class Strings {
 		Properties db = new Properties();
 		db.load(fis);
 		String login = db.getProperty("db.login");
-		return login;
+		String decrypt = new Decryption().doDecrypt(login);
+		return decrypt;
 	}
 
 	public String getpWord() throws IOException {
@@ -25,7 +26,8 @@ public class Strings {
 		Properties db = new Properties();
 		db.load(fis);
 		String password = db.getProperty("db.password");
-		return password;
+		String decrypt = new Decryption().doDecrypt(password);
+		return decrypt;
 	}
 
 }
